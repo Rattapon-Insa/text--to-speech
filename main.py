@@ -1,16 +1,19 @@
-from IPython.display import Audio
-import gtts
+
 from gtts import gTTS
+import subprocess
+
 
 def text_to_speech():
-    gtts.lang.tts_langs(tld = 'com')
-    tts = gTTS('hello', lang = 'en')
+    with open('text_input.txt') as f:
+        lines = f.read()
+    tts = gTTS(lines, lang = 'th')
     tts.save('speech.mp3')
+    file = 'speech.mp3'
+    subprocess.call(["afplay", file])
 
 
 
 if __name__ == '__main__':
-    input_text = input(" Your text here: ")
     text_to_speech()
 
 
